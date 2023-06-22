@@ -68,11 +68,17 @@ public class Wisielec {
 
     private void intitialSetup() {
         //utworzenie listy przykładowych słów
-        ArrayList<String> words = new ArrayList<>(List.of("maciek", "dom", "klawiatura", "laptop", "tester"));
+        //ArrayList<String> words = new ArrayList<>(List.of("maciek", "dom", "klawiatura", "laptop", "tester"));
+
+        //lista pochodząca ze słownika sjp
+        Dictionary wordsList = new Dictionary();
 
         //wybranie losowego słowa z dostępnej puli
-        Random random = new Random();
-        wybraneSlowo = words.get(random.nextInt(words.size()));
+        //Random random = new Random();
+        //int range = random.nextInt(words.size());
+        //wybraneSlowo = words.get(range);
+
+        wybraneSlowo = wordsList.dictionaryRead();
         System.out.println(wybraneSlowo);
 
         //stworzenie tablicy znaków do zapisywania wybranych liter i porównywanie dwóch słów
