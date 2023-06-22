@@ -5,8 +5,10 @@ import java.util.*;
 public class Wisielec {
 
     String wybraneSlowo;
+    char[] zgadywanie;
     char[] wpisywaneSlowo;
-    boolean isEnd = false;
+    int lives = 3;
+    boolean shoot = false;
 
     public void start() {
 
@@ -19,7 +21,7 @@ public class Wisielec {
         System.out.println(wybraneSlowo);
 
         //stworzenie tablicy znaków do zapisywania wybranych liter i porównywanie dwóch słów
-        char[] zgadywanie = wybraneSlowo.toCharArray();
+        zgadywanie = wybraneSlowo.toCharArray();
         wpisywaneSlowo = new char[zgadywanie.length];
         Arrays.fill(wpisywaneSlowo, '_');
         //System.out.println(wpisywaneSlowo);
@@ -29,18 +31,23 @@ public class Wisielec {
         while (!end()) {
             Scanner scanner = new Scanner(System.in);
             System.out.println(wpisywaneSlowo);
+            System.out.println("Pozostało żyć: " + lives);
             System.out.println("Proszę podać zgadywaną literę");
 
+
             char letter = scanner.nextLine().toLowerCase(Locale.ROOT).charAt(0);
+            shoot = false;
 
             for (int i = 0; i < zgadywanie.length; i++) {
                 if (letter == zgadywanie[i]) {
                     wpisywaneSlowo[i] = letter;
+                    shoot = true;
                 }
+
             }
-            if(Arrays.equals(wpisywaneSlowo, zgadywanie)) {
+
+            if(end()) {
                 System.out.println("Gratulacje! Wygrałeś!");
-                isEnd = true;
             }
         }
 
@@ -48,7 +55,7 @@ public class Wisielec {
 
     public boolean end() {
 
-        return isEnd;
+        return Arrays.equals(wpisywaneSlowo, zgadywanie);
     }
 
 }
