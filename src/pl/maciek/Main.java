@@ -6,6 +6,9 @@ public class Main {
 
         Wisielec wisielec = new Wisielec();
         wisielec.start();
+
+       // Dictionary dictionary = new Dictionary();
+       // dictionary.dictionaryRead();
     }
 }
 
