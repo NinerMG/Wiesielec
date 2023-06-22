@@ -8,7 +8,7 @@ public class Wisielec {
     char[] zgadywanie;
     char[] wpisywaneSlowo;
     int lives = 3;
-    boolean shoot = false;
+
 
     public void start() {
 
@@ -31,22 +31,33 @@ public class Wisielec {
         while (!end()) {
             Scanner scanner = new Scanner(System.in);
             System.out.println(wpisywaneSlowo);
+            System.out.println();
             System.out.println("Pozostało żyć: " + lives);
             System.out.println("Proszę podać zgadywaną literę");
 
 
             char letter = scanner.nextLine().toLowerCase(Locale.ROOT).charAt(0);
-            shoot = false;
+            boolean shoot = false;
 
             for (int i = 0; i < zgadywanie.length; i++) {
                 if (letter == zgadywanie[i]) {
                     wpisywaneSlowo[i] = letter;
+                    System.out.println("Trafiłeś z literą " + letter);
                     shoot = true;
                 }
 
             }
 
-            if(end()) {
+            if (!shoot) {
+                System.out.println("Pudło! Straciłeś życie");
+                lives--;
+            }
+
+            if (lives == 0) {
+                System.out.println("Straciłeś wszystkie życia...przegrałeś");
+            }
+
+            if(Arrays.equals(wpisywaneSlowo, zgadywanie)) {
                 System.out.println("Gratulacje! Wygrałeś!");
             }
         }
@@ -55,7 +66,7 @@ public class Wisielec {
 
     public boolean end() {
 
-        return Arrays.equals(wpisywaneSlowo, zgadywanie);
+        return Arrays.equals(wpisywaneSlowo, zgadywanie) || lives == 0;
     }
 
 }
