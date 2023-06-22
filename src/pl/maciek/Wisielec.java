@@ -7,7 +7,7 @@ public class Wisielec {
     String wybraneSlowo;
     char[] zgadywanie;
     char[] wpisywaneSlowo;
-    int lives = 3;
+    int lives;
     boolean shoot;
 
 
@@ -15,6 +15,7 @@ public class Wisielec {
 
         intitialSetup();
 
+        difficult();
 
         //pętla while do kontynuwania gry
         gameLoop();
@@ -83,6 +84,29 @@ public class Wisielec {
     public boolean end() {
 
         return Arrays.equals(wpisywaneSlowo, zgadywanie) || lives == 0;
+    }
+
+    public void difficult() {
+
+
+
+        System.out.println("Wybierz poziom trudności");
+        System.out.println("1. Łatwy");
+        System.out.println("2. Normalny");
+        System.out.println("3. Trudny");
+
+        Scanner scanner = new Scanner(System.in);
+
+        int level = scanner.nextInt();
+
+        switch (level) {
+            case 1 -> lives = 5;
+            case 2 -> lives = 3;
+            case 3 -> lives = 2;
+            default -> lives = 3;
+        }
+
+
     }
 
 }
