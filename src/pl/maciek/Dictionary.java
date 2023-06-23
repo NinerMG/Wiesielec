@@ -12,7 +12,7 @@ public class Dictionary {
 
     public String dictionaryRead() {
 
-        String localization = "D:\\Wiesielec\\slowniki\\slowa.txt";
+        String localization = "D:\\Wiesielec\\zasoby\\slowa.txt";
 
         try (BufferedReader reader = new BufferedReader(new FileReader(localization))) {
             String linia;
