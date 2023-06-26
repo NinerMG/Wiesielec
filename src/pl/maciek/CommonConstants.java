@@ -7,8 +7,11 @@ public class CommonConstants {
     public static final Dimension FRAME_SIZE = new Dimension(540,760);
 
     //lokalizacja słownika z definicjami
-    public static final String DATA_PATH = "/Users/maciek/Desktop/Wiesielec/zasoby/slowa.txt";
 
-    public static final String IMAGE_PATH = "/Users/maciek/Desktop/Wiesielec/zasoby/1.png";
+    public static final String DATA_PATH = "pl/maciek/zasoby/SlowaKategorie";
+
+    public static final String IMAGE_PATH = "/pl/maciek/zasoby/1.png";
+=======
+ 
 
 }

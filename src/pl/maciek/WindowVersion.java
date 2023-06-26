@@ -1,18 +1,16 @@
 package pl.maciek;
 
 import javax.swing.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 public class WindowVersion extends JFrame {
-
-    private final WordsDefinition wordsDefinition;
-
-    //liczenie niepowodzeń użytkownika
     private int incorrectGuesses;
+    private final WordsDefinition wordsDefinition;
+    private JLabel hangmanImage;
+    private String[] wordChallange;
 
-    //przechowywanie słowa do zgadnięcia
-    private String[] wordChallenge;
 
-    private JLabel wisielecZdjecie;
 
     public WindowVersion() {
         super("Wisielec (edycja Java)");
@@ -22,25 +20,21 @@ public class WindowVersion extends JFrame {
         setLayout(null);
         setResizable(false);
 
-        //inicjacja
         wordsDefinition = new WordsDefinition();
-        wordChallenge = wordsDefinition.loadChallange();
-
-
+        wordChallange = wordsDefinition.loadChallange();
 
         addGUIComponents();
-
     }
+        private void addGUIComponents() {
 
-    private void addGUIComponents(){
-        //wisielec zdjęcie
-        wisielecZdjecie = CustomTools.loadImage(CommonConstants.IMAGE_PATH);
-        wisielecZdjecie.setBounds(0,0, wisielecZdjecie.getPreferredSize().width, wisielecZdjecie.getPreferredSize().height);
+            System.out.println(System.getProperty("user.dir"));
+        hangmanImage = CustomTools.loadImage(CommonConstants.IMAGE_PATH);
+        hangmanImage.setBounds(0,0, hangmanImage.getPreferredSize().width, hangmanImage.getPreferredSize().height);
 
+        getContentPane().add(hangmanImage);
 
-        getContentPane().add(wisielecZdjecie);
-    }
+        }
+
 
 }
-
 
