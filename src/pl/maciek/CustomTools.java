@@ -17,4 +17,16 @@ public class CustomTools {
         }
         return null;
     }
+
+    public static String hiddenWords(String word) {
+        String hiddenWord = "";
+        for (int i = 0; i < word.length(); i++) {
+            if (!(word.charAt(i) == ' ')) {
+                hiddenWord += "*";
+            }else {
+                hiddenWord += " ";
+            }
+        }
+        return hiddenWord;
+    }
 }
