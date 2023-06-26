@@ -7,7 +7,7 @@ import java.awt.*;
 public class WindowVersion extends JFrame {
     private int incorrectGuesses;
     private final WordsDefinition wordsDefinition;
-    private JLabel hangmanImage, categoryLabel;
+    private JLabel hangmanImage, categoryLabel, hiddenWordLabel;
     private String[] wordChallange;
 
 
@@ -19,6 +19,7 @@ public class WindowVersion extends JFrame {
         setLocationRelativeTo(null);
         setLayout(null);
         setResizable(false);
+        getContentPane().setBackground(CommonConstants.BACKGROUND_COLOR);
 
         wordsDefinition = new WordsDefinition();
         wordChallange = wordsDefinition.loadChallange();
@@ -44,11 +45,19 @@ public class WindowVersion extends JFrame {
                 CommonConstants.FRAME_SIZE.width,
                 categoryLabel.getPreferredSize().height
         );
+        //ukryte słowo - do zgadnięcia
+        hiddenWordLabel = new JLabel(CustomTools.hiddenWords(wordChallange[1]));
+        hiddenWordLabel.setForeground(Color.WHITE);
+        hiddenWordLabel.setBounds(
+                0,
+                categoryLabel.getY() + categoryLabel.getPreferredSize().height +  50,
+                CommonConstants.FRAME_SIZE.width,
+                hiddenWordLabel.getPreferredSize().height
+        );
 
-        getContentPane().add(categoryLabel);
-        getContentPane().add(hangmanImage);
-
-
+            getContentPane().add(categoryLabel);
+            getContentPane().add(hangmanImage);
+            getContentPane().add(hiddenWordLabel);
         }
 
 
