@@ -11,7 +11,7 @@ public class CommonConstants {
     public static final String DATA_PATH = "pl/maciek/zasoby/SlowaKategorie";
 
     public static final String IMAGE_PATH = "/pl/maciek/zasoby/1.png";
-=======
+
  
 
 }
