@@ -16,7 +16,7 @@ public class WordsDefinition {
             wordList = new HashMap<>();
             categories = new ArrayList<>();
 
-            String filePath = getClass().getClassLoader().getResource(CommonConstants.DATA_PATH).getPath();
+            String filePath = getClass().getClassLoader().getResource(CommonConstants.DATA_PATH).getPath();;
             if (filePath.contains("%20")) filePath = filePath.replaceAll("%20", " ");
 
             BufferedReader reader = new BufferedReader(new FileReader(filePath));
