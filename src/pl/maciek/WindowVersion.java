@@ -2,14 +2,17 @@ package pl.maciek;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
-public class WindowVersion extends JFrame {
+public class WindowVersion extends JFrame implements ActionListener {
     private int incorrectGuesses;
     private final WordsDefinition wordsDefinition;
     private JLabel hangmanImage, categoryLabel, hiddenWordLabel;
     private String[] wordChallange;
 
+    private JButton[] letterButtons;
 
 
     public WindowVersion() {
@@ -22,6 +25,7 @@ public class WindowVersion extends JFrame {
         getContentPane().setBackground(CommonConstants.BACKGROUND_COLOR);
 
         wordsDefinition = new WordsDefinition();
+        letterButtons = new JButton[32];
         wordChallange = wordsDefinition.loadChallange();
 
         addGUIComponents();
@@ -55,11 +59,43 @@ public class WindowVersion extends JFrame {
                 hiddenWordLabel.getPreferredSize().height
         );
 
+        //litery
+            GridLayout gridLayout = new GridLayout(4, 8);
+            JPanel buttonPanel = new JPanel();
+            buttonPanel.setBounds(
+                    -5,
+                    hiddenWordLabel.getY() + hiddenWordLabel.getPreferredSize().height,
+                    CommonConstants.BUTTON_PANEL_SIZE.width,
+                    CommonConstants.BUTTON_PANEL_SIZE.height
+            );
+            buttonPanel.setLayout(gridLayout);
+
+            //utworzenie przycisków dla liter
+
+            for (char c = 'A'; c <= 'Z'; c++) {
+                JButton button = new JButton(Character.toString(c));
+                button.setBackground(CommonConstants.PRIMARY_COLOR);
+                button.setForeground(Color.BLACK);
+                button.addActionListener(this);
+
+                //używanie wartości ASCII do obliczenia indeksu
+                int currentIndex = c - 'A';
+
+                letterButtons[currentIndex] = button;
+                buttonPanel.add(letterButtons[currentIndex]);
+
+            }
+
             getContentPane().add(categoryLabel);
             getContentPane().add(hangmanImage);
             getContentPane().add(hiddenWordLabel);
+            getContentPane().add(buttonPanel);
         }
 
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
 }
 
