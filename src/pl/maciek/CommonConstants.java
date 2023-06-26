@@ -12,6 +12,11 @@ public class CommonConstants {
 
     public static final String IMAGE_PATH = "/pl/maciek/zasoby/1.png";
 
+    public static final Color PRIMARY_COLOR = Color.decode("#14212D");
+
+    public static final Color SECONDARY_COLOR = Color.decode("#FCA311");
+
+    public static final Color BACKGROUND_COLOR = Color.decode("101820");
  
 
 }
