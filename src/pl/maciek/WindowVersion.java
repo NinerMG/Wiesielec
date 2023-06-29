@@ -25,7 +25,7 @@ public class WindowVersion extends JFrame implements ActionListener {
         getContentPane().setBackground(CommonConstants.BACKGROUND_COLOR);
 
         wordsDefinition = new WordsDefinition();
-        letterButtons = new JButton[32];
+        letterButtons = new JButton[26];
         wordChallange = wordsDefinition.loadChallange();
 
         addGUIComponents();
@@ -52,6 +52,7 @@ public class WindowVersion extends JFrame implements ActionListener {
         //ukryte słowo - do zgadnięcia
         hiddenWordLabel = new JLabel(CustomTools.hiddenWords(wordChallange[1]));
         hiddenWordLabel.setForeground(Color.WHITE);
+        hiddenWordLabel.setHorizontalAlignment(SwingConstants.CENTER);
         hiddenWordLabel.setBounds(
                 0,
                 categoryLabel.getY() + categoryLabel.getPreferredSize().height +  50,
@@ -85,6 +86,21 @@ public class WindowVersion extends JFrame implements ActionListener {
                 buttonPanel.add(letterButtons[currentIndex]);
 
             }
+
+            //przycisk reset
+            JButton resetButton = new JButton("Reset");
+            resetButton.setForeground(Color.RED);
+            resetButton.setBackground(Color.RED);
+            resetButton.addActionListener(this);
+            buttonPanel.add(resetButton);
+
+            //przycisk wyjścia
+            JButton quitButton = new JButton("Quit");
+            quitButton.setForeground(Color.BLUE);
+            quitButton.setBackground(Color.BLUE);
+            quitButton.addActionListener(this);
+            buttonPanel.add(quitButton);
+
 
             getContentPane().add(categoryLabel);
             getContentPane().add(hangmanImage);

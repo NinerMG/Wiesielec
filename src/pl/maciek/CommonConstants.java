@@ -18,7 +18,7 @@ public class CommonConstants {
 
     public static final Color BACKGROUND_COLOR = Color.decode("101820");
 
-    public static final Dimension BUTTON_PANEL_SIZE = new Dimension(FRAME_SIZE.width, (int)(FRAME_SIZE.height * 0.42));
+    public static final Dimension BUTTON_PANEL_SIZE = new Dimension(FRAME_SIZE.width, (int)(FRAME_SIZE.height * 0.45));
  
 
 }
