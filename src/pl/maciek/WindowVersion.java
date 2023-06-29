@@ -111,7 +111,80 @@ public class WindowVersion extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        String command = e.getActionCommand();
+        if(command.equals("Reset")) {
+            resetGame();
+        }
+        else if (command.equals("Quit")) {
+            dispose();
+            return;
+        }
+        else {
+            //przyciski liter
 
+            //wyłączenie przycisków
+            JButton button = (JButton) e.getSource();
+            button.setEnabled(false);
+
+            //sprawdzenie czy słowo zawiera literę
+            if(wordChallange[1].contains(command)) {
+                //pokazanie, że gracz odgadł
+                button.setBackground(Color.GREEN);
+
+                //przechowywanie słowa w char array, aby aktualizować tekst
+                char[] hiddenWord = hiddenWordLabel.getText().toCharArray();
+
+                for (int i = 0; i < wordChallange[1].length(); i++){
+                    //aktualizacja do odpowiedniej litery
+                    if (wordChallange[1].charAt(i) == command.charAt(0)) {
+                        hiddenWord[i] = command.charAt(0);
+                    }
+                }
+
+                //uaktualnienie ukrytego słowa
+                hiddenWordLabel.setText(String.valueOf(hiddenWord));
+
+                //gracz zgadł całe słowo
+
+            }else {
+                //gracz wybrał złą literkę
+                button.setBackground(Color.RED);
+
+                //zwiększenie niepoprawnych zgadnięć - licznik
+                ++incorrectGuesses;
+
+                //zaktualozwanie zdjęcia
+                CustomTools.updateImage(hangmanImage, "/pl/maciek/zasoby/" + incorrectGuesses + ".png");
+
+                //użytkownik nie zgadł
+
+            }
+        }
+    }
+
+    private void resetGame() {
+        //załaduj nowe słówko
+        wordChallange = wordsDefinition.loadChallange();
+        incorrectGuesses = 0;
+
+        //załaduj obrazek początkowy
+        CustomTools.updateImage(hangmanImage, CommonConstants.IMAGE_PATH);
+
+
+        //aktualizacja kategorii
+        categoryLabel.setText(wordChallange[0]);
+
+        //aktualizacja ukrytego słowa
+        String hiddenWord = CustomTools.hiddenWords(wordChallange[1]);
+        hiddenWordLabel.setText(hiddenWord);
+
+
+        //uaktywnienie ponownie przycisków
+        for (int i = 0; i < letterButtons.length; i++) {
+            letterButtons[i].setEnabled(true);
+            letterButtons[i].setBackground(CommonConstants.PRIMARY_COLOR);
+
+        }
     }
 }
 
