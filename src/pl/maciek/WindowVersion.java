@@ -4,15 +4,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 
 public class WindowVersion extends JFrame implements ActionListener {
     private int incorrectGuesses;
     private final WordsDefinition wordsDefinition;
-    private JLabel hangmanImage, categoryLabel, hiddenWordLabel;
+    private JLabel hangmanImage, categoryLabel, hiddenWordLabel, resultLabel, wordLabel;
     private String[] wordChallange;
 
     private JButton[] letterButtons;
+    private JDialog resultDialog;
 
 
     public WindowVersion() {
@@ -27,6 +30,7 @@ public class WindowVersion extends JFrame implements ActionListener {
         wordsDefinition = new WordsDefinition();
         letterButtons = new JButton[26];
         wordChallange = wordsDefinition.loadChallange();
+        createResultDialog();
 
         addGUIComponents();
     }
@@ -112,8 +116,12 @@ public class WindowVersion extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
-        if(command.equals("Reset")) {
+        if(command.equals("Reset") || command.equals("Restart")){
             resetGame();
+
+            if(command.equals("Restart")) {
+                resultDialog.setVisible(false);
+            }
         }
         else if (command.equals("Quit")) {
             dispose();
@@ -145,6 +153,11 @@ public class WindowVersion extends JFrame implements ActionListener {
                 hiddenWordLabel.setText(String.valueOf(hiddenWord));
 
                 //gracz zgadł całe słowo
+                if(!hiddenWordLabel.getText().contains("*")) {
+                    //wyświetlenie okienka z napisem gratki
+                    resultLabel.setText("Odgadłeś całe słowo spryciarzu!");
+                    resultDialog.setVisible(true);
+                }
 
             }else {
                 //gracz wybrał złą literkę
@@ -157,9 +170,51 @@ public class WindowVersion extends JFrame implements ActionListener {
                 CustomTools.updateImage(hangmanImage, "/pl/maciek/zasoby/" + incorrectGuesses + ".png");
 
                 //użytkownik nie zgadł
+                if(incorrectGuesses >= 6) {
+                    //wyświetlenie okienka z końcem gry
+                    resultLabel.setText("Szkoda...przegrałeś");
+                    //resultLabel.setText("Poprawne słowo to: " + wordChallange[1]);
+                    resultDialog.setVisible(true);
+                }
 
             }
+            wordLabel.setText("Słowo: " + wordChallange[1]);
         }
+    }
+
+    private void createResultDialog() {
+        resultDialog = new JDialog();
+        resultDialog.setTitle("Result");
+        resultDialog.setSize(CommonConstants.RESULT_DIALOG_SIZE);
+        resultDialog.getContentPane().setBackground(CommonConstants.BACKGROUND_COLOR);
+        resultDialog.setResizable(false);
+        resultDialog.setLocationRelativeTo(this);
+        resultDialog.setModal(true);
+        resultDialog.setLayout(new GridLayout(3,1));
+        resultDialog.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                resetGame();
+            }
+        });
+
+        resultLabel = new JLabel();
+        resultLabel.setForeground(Color.WHITE);
+        resultLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
+        wordLabel = new JLabel();
+        wordLabel.setForeground(Color.WHITE);
+        wordLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
+
+        JButton restartButton = new JButton("Restart");
+        restartButton.setBackground(Color.WHITE);
+        restartButton.setForeground(CommonConstants.SECONDARY_COLOR);
+        restartButton.addActionListener(this);
+
+        resultDialog.add(resultLabel);
+        resultDialog.add(wordLabel);
+        resultDialog.add(restartButton);
     }
 
     private void resetGame() {
