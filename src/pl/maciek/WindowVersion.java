@@ -17,6 +17,8 @@ public class WindowVersion extends JFrame implements ActionListener {
     private JButton[] letterButtons;
     private JDialog resultDialog;
 
+    private Font customFont;
+
 
     public WindowVersion() {
         super("Wisielec (edycja Java)");
@@ -30,6 +32,7 @@ public class WindowVersion extends JFrame implements ActionListener {
         wordsDefinition = new WordsDefinition();
         letterButtons = new JButton[26];
         wordChallange = wordsDefinition.loadChallange();
+        customFont = CustomTools.createFont(CommonConstants.FONT_PATH);
         createResultDialog();
 
         addGUIComponents();
@@ -42,6 +45,7 @@ public class WindowVersion extends JFrame implements ActionListener {
 
         //ekran kategorii
         categoryLabel = new JLabel(wordChallange[0]);
+        categoryLabel.setFont(customFont.deriveFont(30f));
         categoryLabel.setHorizontalAlignment(SwingConstants.CENTER);
         categoryLabel.setOpaque(true);
         categoryLabel.setForeground(Color.WHITE);
@@ -55,6 +59,7 @@ public class WindowVersion extends JFrame implements ActionListener {
         );
         //ukryte słowo - do zgadnięcia
         hiddenWordLabel = new JLabel(CustomTools.hiddenWords(wordChallange[1]));
+        hiddenWordLabel.setFont(customFont.deriveFont(35f));
         hiddenWordLabel.setForeground(Color.WHITE);
         hiddenWordLabel.setHorizontalAlignment(SwingConstants.CENTER);
         hiddenWordLabel.setBounds(
@@ -79,8 +84,9 @@ public class WindowVersion extends JFrame implements ActionListener {
 
             for (char c = 'A'; c <= 'Z'; c++) {
                 JButton button = new JButton(Character.toString(c));
+                button.setFont(customFont.deriveFont(20f));
                 button.setBackground(CommonConstants.PRIMARY_COLOR);
-                button.setForeground(Color.BLACK);
+                button.setForeground(Color.WHITE);
                 button.addActionListener(this);
 
                 //używanie wartości ASCII do obliczenia indeksu
@@ -93,14 +99,16 @@ public class WindowVersion extends JFrame implements ActionListener {
 
             //przycisk reset
             JButton resetButton = new JButton("Reset");
-            resetButton.setForeground(Color.RED);
+            resetButton.setFont(customFont.deriveFont(20f));
+            resetButton.setForeground(Color.WHITE);
             resetButton.setBackground(Color.RED);
             resetButton.addActionListener(this);
             buttonPanel.add(resetButton);
 
             //przycisk wyjścia
             JButton quitButton = new JButton("Quit");
-            quitButton.setForeground(Color.BLUE);
+            quitButton.setFont(customFont.deriveFont(20f));
+            quitButton.setForeground(Color.WHITE);
             quitButton.setBackground(Color.BLUE);
             quitButton.addActionListener(this);
             buttonPanel.add(quitButton);
