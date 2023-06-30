@@ -10,7 +10,7 @@ public class CommonConstants {
 
     public static final String DATA_PATH = "pl/maciek/zasoby/SlowaKategorie";
 
-    public static final String IMAGE_PATH = "/pl/maciek/zasoby/1.png";
+    public static final String IMAGE_PATH = "/pl/maciek/zasoby/0.png";
 
     public static final Color PRIMARY_COLOR = Color.decode("#14212D");
 
@@ -21,6 +21,8 @@ public class CommonConstants {
     public static final Dimension BUTTON_PANEL_SIZE = new Dimension(FRAME_SIZE.width, (int)(FRAME_SIZE.height * 0.45));
 
     public static final Dimension RESULT_DIALOG_SIZE = new Dimension((int)(FRAME_SIZE.width/2), (int)(FRAME_SIZE.height/6));
+
+    public static final String FONT_PATH = "pl/maciek/zasoby/Cartoonero.ttf";
  
 
 }
